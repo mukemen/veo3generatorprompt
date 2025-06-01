@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FABARO MUKEMEN Veo 3 Prompt Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4ff; margin: 0; padding: 20px; }
+    .container { background: #fff; border-radius: 10px; padding: 20px; max-width: 800px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #5b2be0; text-align: center; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { padding: 10px 15px; margin: 10px 5px; border: none; border-radius: 5px; cursor: pointer; }
+    .btn-primary { background-color: #2d6cdf; color: white; }
+    .btn-secondary { background-color: #666; color: white; }
+    .output { background: #f8f8f8; padding: 10px; border-radius: 5px; min-height: 50px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>MUKEMEN Veo 3 Prompt Generator</h2>
+    <form id="promptForm">
+      <label>1. Subjek</label><input type="text" id="subjek">
+      <label>2. Kegiatan</label><input type="text" id="aksi">
+      <label>3. Ekspresi</label><input type="text" id="ekspresi">
+      <label>4. Tempat</label><input type="text" id="tempat">
+      <label>5. Waktu</label><select id="waktu">
+        <option value="">--Pilih--</option>
+        <option>Pagi</option><option>Siang</option><option>Sore</option><option>Malam</option>
+      </select>
+      <label>6. Gerakan Kamera</label><select id="kamera">
+        <option value="">--Pilih--</option>
+        <option>Zoom in</option><option>Pan</option><option>Tracking</option><option>Static</option>
+      </select>
+      <label>7. Pencahayaan</label><select id="pencahayaan">
+        <option value="">--Pilih--</option>
+        <option>Terang</option><option>Remang-remang</option><option>Gelap</option>
+      </select>
+      <label>8. Gaya Video</label><select id="gaya">
+        <option value="">--Pilih--</option>
+        <option>Cinematic</option><option>Animasi</option><option>Dokumenter</option>
+      </select>
+      <label>9. Suasana Video</label><select id="suasana">
+        <option value="">--Pilih--</option>
+        <option>Menegangkan</option><option>Tenang</option><option>Lucu</option>
+      </select>
+      <label>10. Suara/Musik</label><input type="text" id="musik">
+      <label>11. Kalimat yang Diucapkan Karakter</label><input type="text" id="ucapan">
+      <label>12. Detail Tambahan</label><input type="text" id="detail"><button type="button" class="btn-primary" onclick="buatPrompt()">Buat & Terjemahkan Prompt</button>
+  <button type="button" class="btn-secondary" onclick="resetForm()">Reset Semua Input</button>
+</form>
+
+<h3>Prompt Dihasilkan (Indonesia):</h3>
+<div class="output" id="outputID"></div>
+
+<h3>Prompt Final (English):</h3>
+<div class="output" id="outputEN"></div>
+
+  </div>  <script>
+    function buatPrompt() {
+      const ambil = id => document.getElementById(id).value;
+
+      const promptID = `Di ${ambil('tempat')} pada ${ambil('waktu')}, ${ambil('subjek')} sedang ${ambil('aksi')} dengan ekspresi ${ambil('ekspresi')}. Kamera menggunakan gerakan ${ambil('kamera')} dengan pencahayaan ${ambil('pencahayaan')}. Gaya video ${ambil('gaya')}, suasana ${ambil('suasana')}, diiringi musik ${ambil('musik')}. Kalimat yang diucapkan: \"${ambil('ucapan')}\". Detail tambahan: ${ambil('detail')}.`;
+
+      const promptEN = `In ${ambil('tempat')} during the ${ambil('waktu')}, ${ambil('subjek')} is ${ambil('aksi')} with a ${ambil('ekspresi')} expression. The camera uses ${ambil('kamera')} movement with ${ambil('pencahayaan')} lighting. The video style is ${ambil('gaya')}, atmosphere is ${ambil('suasana')}, accompanied by ${ambil('musik')} music. Spoken phrase: \"${ambil('ucapan')}\". Additional details: ${ambil('detail')}.`;
+
+      document.getElementById("outputID").innerText = promptID;
+      document.getElementById("outputEN").innerText = promptEN;
+    }
+
+    function resetForm() {
+      document.getElementById("promptForm").reset();
+      document.getElementById("outputID").innerText = "";
+      document.getElementById("outputEN").innerText = "";
+    }
+  </script></body>
+</html>
